@@ -14,11 +14,13 @@ class Ping(pong: ActorRef) extends Actor {
   def receive = {
     case StartMessage =>
         val logger1: Logger = LoggerFactory.getLogger(this.getClass)
-        logger1.info("Starting")
+        val test  = Map("service" -> "ping-start").asJava
+        logger1.info(appendEntries(test), "hello")
         pong ! PingMessage
     case PongMessage => 
         val logger2: Logger = LoggerFactory.getLogger(this.getClass)
-        logger2.info("Finishing Ping")
+        val test  = Map("service" -> "ping-pong").asJava
+        logger2.info(appendEntries(test), "hello")
         pong ! StopMessage
         exit()
   }
@@ -28,11 +30,13 @@ class Pong extends Actor {
   def receive = {
     case PingMessage =>
         val logger1: Logger = LoggerFactory.getLogger(this.getClass)
-        logger1.info("sending pong")
+        val test  = Map("service" -> "pong-ping").asJava
+        logger1.info(appendEntries(test), "hello")
         sender ! PongMessage
     case StopMessage =>
         val logger2: Logger = LoggerFactory.getLogger(this.getClass)
-        logger2.info("Finishing Pong")
+        val test  = Map("service" -> "stop").asJava
+        logger2.info(appendEntries(test), "hello")
         exit()
   }
 }
@@ -47,10 +51,7 @@ object PingPongTest extends App {
   val service  = Map("service" -> serviceInfo).asJava
   val json  = Map("json" -> service).asJava
 
-  println(json)
-  println(appendEntries(json))
-
-  logger.info(appendEntries(json), "log message")
+  logger.info(appendEntries(json), "hello")
 
   // start them going
   ping ! StartMessage
