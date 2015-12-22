@@ -1,0 +1,1 @@
+javac -classpath lib/ch.qos.logback.logback-core-1.1.3.jar:lib/log4j-1.2.16.jar:lib/ch.qos.logback.logback-classic-1.1.3.jar:lib/slf4j-api-1.7.12.jar:lib/logstash-logback-encoder-4.3.jar MyLogAppender.java
