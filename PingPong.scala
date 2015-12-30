@@ -22,7 +22,7 @@ class Ping(pong: ActorRef) extends Actor {
         val test  = Map("service" -> "ping-pong").asJava
         logger2.info(appendEntries(test), "hello")
         pong ! StopMessage
-        exit()
+        sys.exit()
   }
 }
  
@@ -37,7 +37,7 @@ class Pong extends Actor {
         val logger2: Logger = LoggerFactory.getLogger(this.getClass)
         val test  = Map("service" -> "stop").asJava
         logger2.info(appendEntries(test), "hello")
-        exit()
+        sys.exit()
   }
 }
  
